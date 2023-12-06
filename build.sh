@@ -58,7 +58,7 @@ export LIBZ_SYS_STATIC=1
 mkdir -p /.cargo
 cat > /.cargo/config.toml << EOF
 [target.x86_64-apple-darwin]
-linker = "/opt/osxcross/target/bin/x86_64-apple-darwin14-clang"
+linker = "/opt/osxcross/target/bin/o64-clang"
 ar = "/opt/osxcross/target/bin/x86_64-apple-darwin14-ar"
 EOF
 ;;
