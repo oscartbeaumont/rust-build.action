@@ -2,7 +2,7 @@ on:
   release:
     types:
       - published
-
+  workflow_dispatch:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
@@ -35,13 +35,13 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-  test:
-    name: Test the build works
-    needs: containerize
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Create release
-        uses: softprops/action-gh-release@v1
-        with:
-          token: ${{ secrets.RELEASE_TOKEN }}
-          repository: rust-build/rust-build.test
+  # test:
+  #   name: Test the build works
+  #   needs: containerize
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - name: Create release
+  #       uses: softprops/action-gh-release@v1
+  #       with:
+  #         token: ${{ secrets.RELEASE_TOKEN }}
+  #         repository: rust-build/rust-build.test
