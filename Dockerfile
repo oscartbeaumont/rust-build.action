@@ -17,6 +17,10 @@ RUN git clone https://github.com/tpoechtrager/osxcross /opt/osxcross
 RUN curl -Lo /opt/osxcross/tarballs/MacOSX11.3.sdk.tar.xz "https://storage.googleapis.com/ory.sh/build-assets/MacOSX11.3.sdk.tar.xz"
 RUN ["/bin/bash", "-c", "cd /opt/osxcross && UNATTENDED=yes OSX_VERSION_MIN=11.3 ./build.sh"]
 
+# Linux aarch64
+RUN wget -P ~ https://musl.cc/aarch64-linux-musl-cross.tgz
+RUN tar -xvf ~/aarch64-linux-musl-cross.tgz -C /opt/aarch64-musl-cross
+
 COPY entrypoint.sh /entrypoint.sh
 COPY build.sh /build.sh
 COPY common.sh /common.sh

@@ -30,7 +30,18 @@ case ${RUSTTARGET} in
 
 "x86_64-unknown-linux-musl") ;;
 
-"aarch64-unknown-linux-musl") ;;
+"aarch64-unknown-linux-musl")
+export CC=/opt/aarch64-musl-cross/bin/aarch64-linux-musl-cc
+export PATH="/opt/aarch64-musl-cross/bin:$PATH"
+export LIBZ_SYS_STATIC=1
+mkdir -p /.cargo
+cat > /.cargo/config.toml << EOF
+[target.aarch64-unknown-linux-musl]
+linker = "/opt/aarch64-musl-cross/bin/aarch64-linux-musl-gcc"
+ar = "/opt/aarch64-musl-cross/bin/aarch64-linux-musl-ar"
+EOF
+;;
+
 
 "x86_64-unknown-linux-gnu") 
 error "x86_64-unknown-linux-gnu is not supported: please use x86_64-unknown-linux-musl for a statically linked c library"
@@ -61,7 +72,7 @@ mkdir -p /.cargo
 cat > /.cargo/config.toml << EOF
 [target.aarch64-apple-darwin]
 rustflags = ["-C", "link-args=-D__aarch64__"]
-linker = "/opt/osxcross/target/bin/aarch64-apple-darwin14-clang"
+linker = "/opt/osxcross/target/bin/o64-clang"
 ar = "/opt/osxcross/target/bin/aarch64-apple-darwin14-ar"
 EOF
 ;;
