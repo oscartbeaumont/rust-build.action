@@ -58,6 +58,7 @@ export LIBZ_SYS_STATIC=1
 mkdir -p /.cargo
 cat > /.cargo/config.toml << EOF
 [target.aarch64-apple-darwin]
+rustflags = ["-C", "link-args=-D__aarch64__"]
 linker = "/opt/osxcross/target/bin/aarch64-apple-darwin14-clang"
 ar = "/opt/osxcross/target/bin/aarch64-apple-darwin14-ar"
 EOF
