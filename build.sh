@@ -50,6 +50,19 @@ ar = "/opt/osxcross/target/bin/x86_64-apple-darwin14-ar"
 EOF
 ;;
 
+"aarch64-apple-darwin")
+export CC=/opt/osxcross/target/bin/o64-clang
+export CXX=/opt/osxcross/target/bin/o64-clang++
+export PATH="/opt/osxcross/target/bin:$PATH"
+export LIBZ_SYS_STATIC=1
+mkdir -p /.cargo
+cat > /.cargo/config.toml << EOF
+[target.aarch64-apple-darwin]
+linker = "/opt/osxcross/target/bin/aarch64-apple-darwin14-clang"
+ar = "/opt/osxcross/target/bin/aarch64-apple-darwin14-ar"
+EOF
+;;
+
 *)
 error "${RUSTTARGET} is not supported"
 exit 1
