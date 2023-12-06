@@ -12,9 +12,8 @@ RUN apk add --no-cache curl jq git build-base bash zip tar xz zstd upx python3
 RUN apk add --no-cache mingw-w64-gcc
 
 # Linux aarch64
-RUN wget -P ~ https://musl.cc/aarch64-linux-musl-cross.tgz
-RUN mkdir /opt/aarch64-musl-cross
-RUN tar -xvf ~/aarch64-linux-musl-cross.tgz -C /opt/aarch64-musl-cross
+RUN git clone https://github.com/lovell/aarch64-linux-musl-crosstools.git /opt/aarch64-linux-musl-crosstools
+RUN mv /opt/aarch64-linux-musl-crosstools/aarch64-linux-musl-cross /opt/aarch64-musl-cross
 
 # Add apple dependencies
 RUN apk add --no-cache clang cmake libxml2-dev openssl-dev musl-fts-dev bsd-compat-headers
